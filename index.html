@@ -267,7 +267,9 @@ footer {
     You deserve support. You deserve to be heard.
     And you are never alone in this journey.
   </p>
-  <a class="btn" href="#about">Share the Message</a>
+  <button class="btn" id="shareBtn" style="border:0; cursor:pointer; font-size:16px;">
+  Share the Message
+</button>
 </section>
 
 <footer>
@@ -275,6 +277,31 @@ footer {
   <p>Supporting student mental well-being, one conversation at a time.</p>
   <p>Student Mental Health Awareness Campaign | 2026</p>
 </footer>
+<script>
+document.getElementById("shareBtn").addEventListener("click", async () => {
 
+  const shareData = {
+    title: "Mind the Pressure",
+    text: "Your mental health matters! 💚 Discover Mind the Pressure and help us break the stigma around student mental health.",
+    url: "https://calmlikeabombpt.github.io/Mind-the-Pressure/"
+  };
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+    } else {
+      await navigator.clipboard.writeText(
+        shareData.text + " " + shareData.url
+      );
+      alert("Thank you! The campaign link has been copied. 💚");
+    }
+  } catch (error) {
+    if (error.name !== "AbortError") {
+      alert("Please copy and share our campaign link: " + shareData.url);
+    }
+  }
+
+});
+</script>
 </body>
 </html>
